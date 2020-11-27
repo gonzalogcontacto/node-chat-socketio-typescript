@@ -6,22 +6,23 @@
    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
    <title>Socket.io Example</title>
  </head>
-
  <body>
-   <h1>Full Stack Bootcamp Chat</h1>
-   <div>
-     <h2>Mensajes en el Grupo</h2>
-     <ul></ul>
-   </div>
+   
+  <h1>Full Stack Bootcamp Chat</h1>
+  <div>
+    <h2>Mensajes en el Grupo</h2>
+    <ul></ul>
+  </div>
+
    <form action="">
      <input type="text" placeholder="Mensaje"/>
      <button>ENVIAR</button>
    </form>
    
-   
    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.js"></script>
    <script>
     
+    // Promt the user name to can know who emit the messages
     const user = prompt('¿Cómo te llamas?')
 
     // select relevant elements
@@ -30,13 +31,13 @@
     messageList = document.querySelector("ul");
    
     // establish socket.io connection
-    const socket = io("http://localhost:3000");
+    const socket = io("http://localhost:5000");
    
     // handle sending message to server & input reset
     function sendMessage(e) {
         // prevent form submission refreshing page
         e.preventDefault();
-        // send input value to server as type 'message'
+        // send input value to server as type 'message' with author info and text message
         socket.emit("message", 
             {
                 author: user,
@@ -59,15 +60,9 @@
       // add to list of messages
       messageList.append(li);
     }
-     // watch for socket to emit a 'message'
+     // watch for socket to show on html
     socket.on("message", addMessageToHTML);
    
-    // display message when a user connects
-    function alertUserConnected() {
-      addMessageToHTML("User connected");
-    }
-     // watch for socket to emit a 'user connected' event
-    socket.on("user connected", alertUserConnected);
    
    </script>
  </body>

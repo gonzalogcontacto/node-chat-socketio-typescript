@@ -8,15 +8,21 @@
     <title>Document</title>
   </head>
   <body>
-    <button onClick="sendMsg()">Click me!</button>
+    <h1>FSB Group Chat</h1>
+  
+    <span>Example app with websockets</span>
+
+    <button onclick="emitMessage()">Send Message</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.js"></script>
     <script>
-      const socket = io("http://localhost:3000");
+      let socket = io("http://localhost:5000");
 
-      function sendMsg() {
-        socket.emit("message", "HELLO WORLD");
+      function emitMessage(){
+        socket.emit('message', 'Holaaa!!')
       }
+
     </script>
+
   </body>
 </html>
